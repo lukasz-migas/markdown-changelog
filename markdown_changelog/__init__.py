@@ -1,6 +1,6 @@
 """Init"""
 # Local imports
-from mdx_changelog.changelog import ChangelogExtension  # noqa
+from markdown_changelog.changelog import ChangelogExtension  # noqa
 
 
 __version__ = "0.0.1"

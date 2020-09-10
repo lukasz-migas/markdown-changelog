@@ -1,15 +1,12 @@
 """Test mdx_changelog extension"""
-from mdx_changelog import ChangelogExtension
+from markdown_changelog import ChangelogExtension
 import pytest
 import markdown
-
-TEXT_IN = """;;fix;;"""
-TEXT_OUT = '<p><span class="badge badge-fix">Fix</span></p>'
 
 
 class TestMarkdownChangelogExtension:
     def test_load_extension_as_string(self):
-        md = markdown.Markdown(extensions=["mdx_changelog.changelog"])
+        md = markdown.Markdown(extensions=["markdown_changelog.changelog"])
         assert len(md.registeredExtensions) == 1
 
     def test_load_extension_as_string_alt(self):

@@ -6,13 +6,13 @@ DESCRIPTION = "Python-Markdown extension for easy changelog tagging"
 with open("README.md") as f:
     LONG_DESCRIPTION = f.read()
 
-PACKAGE_NAME = "mdx_changelog"
+PACKAGE_NAME = "markdown_changelog"
 MAINTAINER = "Lukasz G. Migas"
 MAINTAINER_EMAIL = "lukas.migas@yahoo.com"
-URL = "https://github.com/lukasz-migas/mdx_changelog"
+URL = "https://github.com/lukasz-migas/markdown-changelog"
 LICENSE = "MIT"
-DOWNLOAD_URL = "https://github.com/lukasz-migas/mdx_changelog"
-INSTALL_REQUIRES = ["markdown", "pymdown-extensions"]
+DOWNLOAD_URL = "https://github.com/lukasz-migas/markdown-changelog"
+INSTALL_REQUIRES = ["markdown"]
 PACKAGES = [package for package in find_packages()]
 CLASSIFIERS = [
     "Development Status :: 5 - Production/Stable",
@@ -53,6 +53,6 @@ setup(
     packages=PACKAGES,
     classifiers=CLASSIFIERS,
     keywords=KEYWORDS,
-    package_dir={"mdx_changelog": "mdx_changelog"},
-    entry_points={"markdown.extensions": ["changelog = mdx_changelog:ChangelogExtension"]},
+    package_dir={"markdown_changelog": "markdown_changelog"},
+    entry_points={"markdown.extensions": ["changelog = markdown_changelog:ChangelogExtension"]},
 )

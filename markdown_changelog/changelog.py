@@ -162,7 +162,7 @@ class ChangelogProcessor(SimpleTagInlineProcessor):
 class ChangelogExtension(markdown.Extension):
     """Add the mark extension to Markdown class."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize."""
 
         # instantiate config
@@ -185,7 +185,7 @@ class ChangelogExtension(markdown.Extension):
         for key, value in kwargs.items():
             self.setConfig(key, str(value))
 
-        markdown.Extension.__init__(self, *args, **kwargs)
+        markdown.Extension.__init__(self, **kwargs)
 
     def extendMarkdown(self, md):
         """Insert `<mark>test</mark>` tags as `==test==`."""
@@ -197,7 +197,7 @@ class ChangelogExtension(markdown.Extension):
 
 
 # noinspection PyPep8Naming
-def makeExtension(*args, **kwargs):
+def makeExtension(**kwargs):
     """Return extension."""
 
-    return ChangelogExtension(*args, **kwargs)
+    return ChangelogExtension(**kwargs)
