@@ -1,13 +1,13 @@
-# mdx-changelog
+# Markdown-changelog
 
 Markdown extension to enable easy addition of changelog badges to your documentation
 
 ## Installation
 
-The easiest way to install Mdx-Changelog is to use pip
+The easiest way to install `markdown-changelog` is to use pip
 
 ```bash
-pip install mdx-changelog
+pip install markdown-changelog
 ```
 
 ## Usage
@@ -20,12 +20,12 @@ md.convert(text)
 '<p><span class="badge badge-fix">Fix</span></p>'
 
 # or
-md = markdown.Markdown(extensions=["mdx_changelog.changelog"])
+md = markdown.Markdown(extensions=["markdown_changelog.changelog"])
 md.convert(text)
 '<p><span class="badge badge-fix">Fix</span></p>'
 
 # or 
-from mdx_changelog import ChangelogExtension
+from markdown_changelog import ChangelogExtension
 md = markdown.Markdown(extensions=[ChangelogExtension()])
 
 md.convert(text)

@@ -126,3 +126,4 @@ dmypy.json
 
 # extras
 .idea/
+_secret
