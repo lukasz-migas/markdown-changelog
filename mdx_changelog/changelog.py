@@ -71,8 +71,6 @@ from xml.etree.ElementTree import Element
 import markdown
 from markdown.inlinepatterns import SimpleTagInlineProcessor
 
-# from pymdownx import util
-
 # --changelog--
 CONTENT = r"((?:[^;]|(?<!={2});)+?)"
 CHANGELOG = r"(;{2})(?!\s)%s(?<!\s)\1" % CONTENT
@@ -87,7 +85,15 @@ EFFICIENCY_COLOR = "#17a2b8"  # cyan
 DOCS_COLOR = "#6610f2"  # purple
 
 # tag specification
-ALTERNATIVE_NAMES = {"changes": "change", "improvements": "improvement", "documentation": "docs", "feature": "new"}
+ALTERNATIVE_NAMES = {
+    "changes": "change",
+    "changed": "change",
+    "improvements": "improvement",
+    "enhancement": "improvement",
+    "enhancements": "improvement",
+    "documentation": "docs",
+    "feature": "new",
+}
 NORMAL_NAMES = ["fix", "change", "improvement", "new", "efficiency", "docs"]
 
 
@@ -108,56 +114,8 @@ def _parse_tag(tag: str):
     return ALTERNATIVE_NAMES.get(tag, tag)
 
 
-# class ChangelogProcessor(util.PatternSequenceProcessor):
-#     """Handle mark patterns."""
-#
-#     PATTERNS = [util.PatSeqItem(re.compile(CHANGELOG, re.DOTALL | re.UNICODE), "single", "span")]
-#
-#     def __init__(self, config, pattern, md):
-#         """Initialize."""
-#
-#         self.config = config
-#         super(ChangelogProcessor, self).__init__(pattern, md)
-#         self.md = md
-#
-#         self._auto_capitalize = bool(self.config.get("auto_capitalize", True))
-#         self._inline_style = bool(config.get("inline_style", False))
-#         self._colors = {
-#             "text": config.get("text_color", TEXT_COLOR),
-#             "fix": config.get("fix_color", FIX_COLOR),
-#             "change": config.get("change_color", CHANGE_COLOR),
-#             "improvement": config.get("improvement_color", IMPROVEMENT_COLOR),
-#             "efficiency": config.get("efficiency_color", EFFICIENCY_COLOR),
-#             "new": config.get("new_color", NEW_COLOR),
-#             "docs": config.get("docs_color", DOCS_COLOR),
-#         }
-#
-#     def _get_colors(self, tag: str):
-#         """Get text and background color based on tags"""
-#         return self._colors["text"], self._colors.get(tag, NEW_COLOR)
-#
-#     def handleMatch(self, m, data):
-#         """Parse patterns"""
-#         el, start, end = super(ChangelogProcessor, self).handleMatch(m, data)
-#         if hasattr(el, "text"):
-#             text = _parse_tag(el.text)
-#             # set style
-#             if self._inline_style:
-#                 _set_inline_style(el, *self._get_colors(text))
-#             else:
-#                 el.set("class", f"badge badge-{text}")
-#
-#             # auto-capitalize the tag
-#             if self._auto_capitalize:
-#                 el.text = text.capitalize()
-#
-#         return el, start, end
-
-
 class ChangelogProcessor(SimpleTagInlineProcessor):
     """Handle mark patterns."""
-
-    # PATTERNS = [util.PatSeqItem(re.compile(CHANGELOG, re.DOTALL | re.UNICODE), "single", "span")]
 
     def __init__(self, config, pattern, tag, md):
         """Initialize."""
@@ -166,6 +124,7 @@ class ChangelogProcessor(SimpleTagInlineProcessor):
         super(ChangelogProcessor, self).__init__(pattern, tag)
         self.md = md
 
+        # settings
         self._auto_capitalize = bool(self.config.get("auto_capitalize", True))
         self._inline_style = bool(config.get("inline_style", False))
         self._colors = {
@@ -206,6 +165,7 @@ class ChangelogExtension(markdown.Extension):
     def __init__(self, *args, **kwargs):
         """Initialize."""
 
+        # instantiate config
         self.config = {
             "inline_style": [False, "Set CSS style inline rather than requiring separate CSS file - Default: False"],
             "auto_capitalize": [True, "Capitalize the tag name - Default: True"],
@@ -221,19 +181,18 @@ class ChangelogExtension(markdown.Extension):
             "efficiency_color": [EFFICIENCY_COLOR, f"Background of the `Efficiency` tag - Default: {EFFICIENCY_COLOR}"],
         }
 
-        super(ChangelogExtension, self).__init__(*args, **kwargs)  # noqa
+        # override defaults with user settings
+        for key, value in kwargs.items():
+            self.setConfig(key, str(value))
+
+        markdown.Extension.__init__(self, *args, **kwargs)
 
     def extendMarkdown(self, md):
         """Insert `<mark>test</mark>` tags as `==test==`."""
         md.registerExtension(self)
 
         config = self.getConfigs()
-
-        # escape_chars = [";"]
-        # util.escape_chars(md, escape_chars)
-
-        changelog = ChangelogProcessor(config, CHANGELOG, "tag", md)
-        # changelog = ChangelogProcessor(config, r";", md)
+        changelog = ChangelogProcessor(config, CHANGELOG, "span", md)
         md.inlinePatterns.register(changelog, "changelog", 65)
 
 
