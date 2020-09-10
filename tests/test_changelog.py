@@ -21,12 +21,17 @@ class TestMarkdownChangelogExtension:
     @pytest.mark.parametrize("color", ["#FF00FF"])
     def test_configs_parameter(self, bool_value, color):
         md = markdown.Markdown(
-            extensions=[ChangelogExtension(inline_style=bool_value, auto_capitalize=bool_value, text_color=color)]
+            extensions=[
+                ChangelogExtension(
+                    inline_style=bool_value, auto_capitalize=bool_value, text_color=color, fix_color=color
+                )
+            ]
         )
         ext = md.registeredExtensions[0]
         assert ext.config["inline_style"][0] == bool_value
         assert ext.config["auto_capitalize"][0] == bool_value
         assert ext.config["text_color"][0] == color
+        assert ext.config["fix_color"][0] == color
 
     @pytest.mark.parametrize(
         "text_in, expected",
@@ -50,3 +55,12 @@ class TestMarkdownChangelogExtension:
         md = markdown.Markdown(extensions=[ChangelogExtension()])
         result = md.convert(text_in)
         assert result == expected
+
+    @pytest.mark.parametrize(
+        "text_in", (";;fix;;", ";;new;;", ";;change;;", ";;improvement;;", ";;docs;;", ";;efficiency;;")
+    )
+    def test_extension_parse_inline_style(self, text_in):
+        md = markdown.Markdown(extensions=[ChangelogExtension(inline_style=True, text_color="#FF00FF")])
+        result = md.convert(text_in)
+        assert "background-color:" in result
+        assert "; color: #FF00FF;" in result
