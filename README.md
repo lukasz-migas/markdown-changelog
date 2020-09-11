@@ -36,12 +36,18 @@ md = markdown.Markdown(extensions=[ChangelogExtension()])
 
 md.convert(text)
 '<p><span class="badge badge-fix">Fix</span></p>'
+
+# you can also specify version
+text = """;;VERv1.2.3;;"""
+md.convert(text)
+'<p><span class="badge badge-version">v1.2.3</span></p>'
 ```
 
 ## Options
 
 - `inline_style` - if `True`, the CSS style will be set inline rather so no additional CSS file(s) are required
 - `auto_capitalize` - if `True`, the tag will be automatically capitalized
+- `rounded_corners` - if `False`, the edges of the badge will be square-ish
 - `text_color` - color of the text (use HEX with # e.g. #FFFFFF)
 - `fix_color` - color of the `Fix` tag
 - `change_color` - color of the `Change` tag
@@ -49,6 +55,7 @@ md.convert(text)
 - `new_color` - color of the `New` tag
 - `docs_color` - color of the `Docs` tag
 - `efficiency_color` - color of the `Efficency` tag
+- `version_color` - color of the `Version` tag
 
 ## Supported tags
 
@@ -72,13 +79,14 @@ style to be set on each item separately
 .badge {
   display: inline-block;
   font-size: 14px;
-  line-height: 14px;
+  line-height: 16px;
   color: #ffffff;
   vertical-align: baseline;
   white-space: nowrap;
   background-color: #999999;
   padding: 2px 9px;
   border-radius: 9px;
+  text-align: center;
 }
 .badge-fix {
     background-color: #dc3545;
@@ -98,5 +106,17 @@ style to be set on each item separately
 .badge-efficiency {
   background-color: #17a2b8;
 }
-
+.badge-remove {
+  background-color: #4F1319;
+}
+.badge-version {
+  min-width: 75px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  background-color: #35087E;
+}
+.badge-square {
+  border-radius: 2px;
+}
 ```

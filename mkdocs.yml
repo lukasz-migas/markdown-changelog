@@ -1,0 +1,24 @@
+site_name: Markdown-Changelog
+site_author: Lukasz G. Migas
+site_description: DocumeDocumentation of markdown-changelog
+repo_url: https://github.com/lukasz-migas/markdown-changelog
+
+use_directory_urls: true
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    collapse_navigation: false
+    sticky_navigation: true
+
+extra_css: [css/style.css]
+
+markdown_extensions:
+    - changelog
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - CSS Style: style.md
+  - History: history.md
