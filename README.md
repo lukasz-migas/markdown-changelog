@@ -2,6 +2,9 @@
 
 Markdown extension to enable easy addition of changelog badges to your documentation
 
+[![Documentation Status](https://readthedocs.org/projects/markdown-changelog/badge/?version=latest)](https://markdown-changelog.readthedocs.io/en/latest/?badge=latest)
+![Tests](https://github.com/lukasz-migas/markdown-changelog/workflows/Tests/badge.svg)
+
 ## Installation
 
 The easiest way to install `markdown-changelog` is to use pip
