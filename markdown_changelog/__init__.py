@@ -4,7 +4,7 @@ from markdown_changelog.changelog import ChangelogExtension  # noqa
 
 
 __version__ = "0.0.4"
-__title__ = "mdx_changelog"
+__title__ = "markdown_changelog"
 __author__ = "Lukasz G. Migas"
 __email__ = "lukas.migas@yahoo.com"
 __licence__ = "MIT"
