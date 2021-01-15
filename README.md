@@ -4,6 +4,7 @@ Markdown extension to enable easy addition of changelog badges to your documenta
 
 [![Documentation Status](https://readthedocs.org/projects/markdown-changelog/badge/?version=latest)](https://markdown-changelog.readthedocs.io/en/latest/?badge=latest)
 ![Tests](https://github.com/lukasz-migas/markdown-changelog/workflows/Tests/badge.svg)
+[![codecov](https://codecov.io/gh/lukasz-migas/markdown-changelog/branch/master/graph/badge.svg?token=82OYPER5DP)](https://codecov.io/gh/lukasz-migas/markdown-changelog)
 
 ## Installation
 
