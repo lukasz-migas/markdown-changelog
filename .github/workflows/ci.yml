@@ -38,9 +38,12 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements/requirements-std.txt
           pip install -r requirements/requirements-dev.txt
+      - name: Install
+        run: |
+          python setup.py install
       - name: Test with pytest
         run: |
-          pytest --cov=mdx_changelog --cov-report=xml
+          pytest --cov=markdown_changelog --cov-report=xml
         continue-on-error: true
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
