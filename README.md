@@ -60,6 +60,7 @@ md.convert(text)
 - `docs_color` - color of the `Docs` tag
 - `efficiency_color` - color of the `Efficency` tag
 - `version_color` - color of the `Version` tag
+- `remove_color` - color of the `Remove` tag
 
 ## Supported tags
 
@@ -71,56 +72,14 @@ The following tags are supported by default:
 - new (or feature)
 - efficiency
 - docs (or documentation)
+- remove (or removed, delete, deleted)
 
 All must be wrapped in double `;`
 
-## CCS
+## Styling and Zensical
 
-Minimum style required to render the badges correctly. You can instead use the `inline_style=True` if you want the
-style to be set on each item separately
-
-```css
-.badge {
-  display: inline-block;
-  font-size: 14px;
-  line-height: 16px;
-  color: #ffffff;
-  vertical-align: baseline;
-  white-space: nowrap;
-  background-color: #999999;
-  padding: 2px 9px;
-  border-radius: 9px;
-  text-align: center;
-}
-.badge-fix {
-    background-color: #dc3545;
-}
-.badge-change {
-  background-color: #fd7e14;
-}
-.badge-improvement {
-  background-color: #007bff;
-}
-.badge-new {
-  background-color: #28a745;
-}
-.badge-docs {
-  background-color: #6610f2;
-}
-.badge-efficiency {
-  background-color: #17a2b8;
-}
-.badge-remove {
-  background-color: #4F1319;
-}
-.badge-version {
-  min-width: 75px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 18px;
-  background-color: #35087E;
-}
-.badge-square {
-  border-radius: 2px;
-}
-```
+Copy [docs/css/style.css](docs/css/style.css) into your documentation site and
+include it as an extra stylesheet. It contains badge styles and an optional
+release timeline. See the [styling guide](docs/style.md) for an example and
+[Zensical setup](docs/zensical.md) for integration instructions. Alternatively,
+set `inline_style=True` to add badge styling directly to the generated HTML.

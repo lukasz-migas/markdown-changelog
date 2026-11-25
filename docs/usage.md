@@ -123,9 +123,9 @@ import markdown
 
 md = markdown.Markdown(extensions=["changelog"], extension_configs={"changelog": {"inline_style": True}})
 md.convert(""";;fix;;""")
-'<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; background-color: #dc3545; color: #ffffff; border-radius: 9px; ">Fix</span></p>'
+'<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; text-align: center; background-color: #1f62c9; color: #ffffff; border-radius: 4px; font-weight: 600; ">Fix</span></p>'
 ```
-<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; background-color: #dc3545; color: #ffffff; border-radius: 9px; ">Fix</span></p>
+<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; text-align: center; background-color: #1f62c9; color: #ffffff; border-radius: 4px; font-weight: 600; ">Fix</span></p>
 
 ### Specify color
 
@@ -137,6 +137,6 @@ import markdown
 
 md = markdown.Markdown(extensions=["changelog"], extension_configs={"changelog": {"inline_style": True, "fix_color":"#FF00FF"}})
 md.convert(""";;fix;;""")
-'<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; background-color: #FF00FF; color: #ffffff; border-radius: 9px; ">Fix</span></p>'```
+'<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; text-align: center; background-color: #FF00FF; color: #ffffff; border-radius: 4px; font-weight: 600; ">Fix</span></p>'
 ```
-<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; background-color: #FF00FF; color: #ffffff; border-radius: 9px; ">Fix</span></p>
+<p><span style="display: inline-block; padding: 2px 9px; font-size: 14px; line-height: 16px; vertical-align: baseline; white-space: nowrap; text-align: center; background-color: #FF00FF; color: #ffffff; border-radius: 4px; font-weight: 600; ">Fix</span></p>

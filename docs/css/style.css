@@ -1,43 +1,66 @@
+/* Badge colors also match the default inline styles. */
 .badge {
   display: inline-block;
-  font-size: 14px;
-  line-height: 16px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  background-color: #999999;
   color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
   vertical-align: baseline;
   white-space: nowrap;
-  background-color: #999999;
-  padding: 2px 9px;
-  border-radius: 9px;
-  text-align: center;
 }
-.badge-fix {
-    background-color: #dc3545;
-}
-.badge-change {
-  background-color: #fd7e14;
-}
-.badge-improvement {
-  background-color: #007bff;
-}
-.badge-new {
-  background-color: #28a745;
-}
-.badge-docs {
-  background-color: #6610f2;
-}
-.badge-efficiency {
-  background-color: #17a2b8;
-}
-.badge-remove {
-  background-color: #4F1319;
-}
+.badge-fix { background-color: #1f62c9; }
+.badge-change { background-color: #8a4b08; }
+.badge-improvement { background-color: #1f62c9; }
+.badge-new { background-color: #21843b; }
+.badge-docs { background-color: #663ab5; }
+.badge-efficiency { background-color: #087079; }
+.badge-remove { background-color: #aa2933; }
 .badge-version {
   min-width: 75px;
-  font-weight: 600;
+  background-color: #6f42c1;
   font-size: 16px;
   line-height: 18px;
-  background-color: #35087E;
 }
-.badge-square {
-  border-radius: 2px;
+.badge-square { border-radius: 2px; }
+
+/* Optional release timeline. Colors inherit from the surrounding theme. */
+.changelog-timeline {
+  border-left: 3px solid currentColor;
+  margin: 2rem 0 2rem 2rem;
+  padding-left: 1.5rem;
+}
+.changelog-release { margin-bottom: 2rem; }
+.changelog-release-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.changelog-release-header .badge-version {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.changelog-entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.changelog-entries li {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0.6rem;
+}
+.changelog-entries .badge { width: auto; }
+@media (max-width: 480px) {
+  .changelog-timeline { margin-left: 0.5rem; padding-left: 0.75rem; }
+  .changelog-entries li { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+  .changelog-entries .badge { justify-self: start; }
 }

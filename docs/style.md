@@ -1,50 +1,44 @@
-# CSS
+# Styling
 
-This is all the CSS you will need to display changelog badges on your website
+Copy [the stylesheet](css/style.css) into your documentation site's `docs/css`
+directory and add `css/style.css` to `extra_css`. The badge colors match the
+extension's default inline colors. Set `inline_style=True` when a stylesheet
+cannot be included; custom color options apply to inline styles only.
 
+## Optional release timeline
 
-```css
-.badge {
-  display: inline-block;
-  font-size: 14px;
-  line-height: 16px;
-  color: #ffffff;
-  vertical-align: baseline;
-  white-space: nowrap;
-  background-color: #999999;
-  padding: 2px 9px;
-  border-radius: 9px;
-  text-align: center;
-}
-.badge-fix {
-    background-color: #dc3545;
-}
-.badge-change {
-  background-color: #fd7e14;
-}
-.badge-improvement {
-  background-color: #007bff;
-}
-.badge-new {
-  background-color: #28a745;
-}
-.badge-docs {
-  background-color: #6610f2;
-}
-.badge-efficiency {
-  background-color: #17a2b8;
-}
-.badge-remove {
-  background-color: #4F1319;
-}
-.badge-version {
-  min-width: 75px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 18px;
-  background-color: #35087E;
-}
-.badge-square {
-  border-radius: 2px;
-}
+The stylesheet also provides an opt-in layout. It inherits text and link colors
+from the surrounding theme and stacks entries on narrow screens. The following
+HTML works without any additional Markdown extensions:
+
+```html
+<div class="changelog-timeline">
+  <section class="changelog-release">
+    <div class="changelog-release-header">
+      <span class="badge badge-version">v1.2.3</span>
+      <time datetime="2026-11-19">November 19, 2026</time>
+    </div>
+    <ul class="changelog-entries">
+      <li><span class="badge badge-new">New</span><span>Add support for multiple projects.</span></li>
+      <li><span class="badge badge-fix">Fix</span><span>Keep long release notes aligned when they wrap onto another line.</span></li>
+    </ul>
+  </section>
+</div>
 ```
+
+<div class="changelog-timeline">
+  <section class="changelog-release">
+    <div class="changelog-release-header">
+      <span class="badge badge-version">v1.2.3</span>
+      <time datetime="2026-11-19">November 19, 2026</time>
+    </div>
+    <ul class="changelog-entries">
+      <li><span class="badge badge-new">New</span><span>Add support for multiple projects.</span></li>
+      <li><span class="badge badge-fix">Fix</span><span>Keep long release notes aligned when they wrap onto another line.</span></li>
+    </ul>
+  </section>
+</div>
+
+The `;;tag;;` syntax still works in normal Markdown. The HTML above uses spans
+explicitly because Markdown processors do not generally process text inside
+raw HTML blocks by default.

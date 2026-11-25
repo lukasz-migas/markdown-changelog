@@ -111,3 +111,43 @@ class TestMarkdownChangelogExtension:
         assert "background-color:" in result
         assert "; color: #FF00FF;" in result
         assert "font-weight" in result
+
+
+@pytest.mark.parametrize(
+    "tag, color_option",
+    [
+        ("fix", "fix_color"),
+        ("change", "change_color"),
+        ("improvement", "improvement_color"),
+        ("new", "new_color"),
+        ("efficiency", "efficiency_color"),
+        ("docs", "docs_color"),
+        ("remove", "remove_color"),
+        ("VERv1.2.3", "version_color"),
+    ],
+)
+def test_inline_badge_uses_configured_color(tag: str, color_option: str) -> None:
+    """Each badge type uses its own configured background color."""
+    extension = ChangelogExtension(inline_style=True, **{color_option: "#123456"})
+    result = markdown.Markdown(extensions=[extension]).convert(f";;{tag};;")
+    assert "background-color: #123456;" in result
+
+
+@pytest.mark.parametrize("tag", ["changed", "CHANGED", "Changed"])
+def test_aliases_are_case_insensitive(tag: str) -> None:
+    """Aliases resolve to the same badge regardless of case."""
+    result = markdown.Markdown(extensions=[ChangelogExtension()]).convert(f";;{tag};;")
+    assert result == '<p><span class="badge badge-change">Change</span></p>'
+
+
+def test_version_can_contain_prefix_text() -> None:
+    """Only the leading version marker is removed."""
+    result = markdown.Markdown(extensions=[ChangelogExtension()]).convert(";;VERv1-VER2;;")
+    assert result == '<p><span class="badge badge-version">v1-VER2</span></p>'
+
+
+def test_inline_version_uses_version_color_for_alias() -> None:
+    """The version text does not determine its inline color."""
+    extension = ChangelogExtension(inline_style=True, version_color="#123456")
+    result = markdown.Markdown(extensions=[extension]).convert(";;VERnew;;")
+    assert "background-color: #123456;" in result

@@ -17,57 +17,8 @@ You can also specify the version by using the following syntax:
 
 for `v1.2.3`. The badge will be slightly larger with bold text.
 
-Minimum Recommended Styling
-(you can also specify the `inline_style=True` config parameter and the style will be automatically added to each
-element)
-
-You can of course modify the CSS as you wish, just make sure to keep the names of `badge, badge-fix...`
-```
-.badge {
-  display: inline-block;
-  font-size: 14px;
-  line-height: 16px;
-  color: #ffffff;
-  vertical-align: baseline;
-  white-space: nowrap;
-  background-color: #999999;
-  padding: 2px 9px;
-  border-radius: 9px;
-  text-align: center;
-}
-.badge-fix {
-    background-color: #dc3545;
-}
-.badge-change {
-  background-color: #fd7e14;
-}
-.badge-improvement {
-  background-color: #007bff;
-}
-.badge-new {
-  background-color: #28a745;
-}
-.badge-docs {
-  background-color: #6610f2;
-}
-.badge-efficiency {
-  background-color: #17a2b8;
-}
-.badge-remove {
-  background-color: #4F1319;
-}
-.badge-version {
-  min-width: 75px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 18px;
-  background-color: #35087E;
-}
-.badge-square {
-  border-radius: 2px;
-}
-```
-
+Styling is available in docs/css/style.css. Set ``inline_style=True`` to
+include badge styles directly in the generated HTML.
 
 MIT license.
 Copyright (c) 2020 Lukasz Migas <lukas.migas@yahoo.com>
@@ -98,14 +49,14 @@ CHANGELOG = r"(;{2})(?!\s)%s(?<!\s)\1" % CONTENT
 
 # colors
 TEXT_COLOR = "#ffffff"  # white
-FIX_COLOR = "#dc3545"  # red
-CHANGE_COLOR = "#fd7e14"  # orange
-IMPROVEMENT_COLOR = "#007bff"  # blue
-NEW_COLOR = "#28a745"  # green
-EFFICIENCY_COLOR = "#17a2b8"  # cyan
-DOCS_COLOR = "#6610f2"  # purple
-REMOVED_COLOR = "#4F1319"  # deep red
-VERSION_COLOR = "#35087E"  # purple
+FIX_COLOR = "#1f62c9"
+CHANGE_COLOR = "#8a4b08"
+IMPROVEMENT_COLOR = "#1f62c9"
+NEW_COLOR = "#21843b"
+EFFICIENCY_COLOR = "#087079"
+DOCS_COLOR = "#663ab5"
+REMOVED_COLOR = "#aa2933"
+VERSION_COLOR = "#6f42c1"
 
 # tag specification
 # these are the pre-defined names that can be used
@@ -137,12 +88,14 @@ def _get_inline_style(text_color: str, bg_color: str, is_version: bool, round_co
         "line-height": "18px" if is_version else "16px",
         "vertical-align": "baseline",
         "white-space": "nowrap",
+        "text-align": "center",
         "background-color": f"{bg_color}",
         "color": f"{text_color}",
-        "border-radius": "9px" if round_corners else "2px",
+        "border-radius": "4px" if round_corners else "2px",
+        "font-weight": "600",
     }
     if is_version:
-        style.update({"width": "65px", "font-weight": "600"})
+        style.update({"min-width": "75px"})
 
     _style = []
     for key, value in style.items():
@@ -160,16 +113,14 @@ def _parse_tag(tag: str) -> Tuple[str, str, bool]:
     is_version = False
     text = tag
     if tag.startswith("VER"):
-        _, text = tag.split("VER")
+        text = tag[3:]
         text = text.strip()
         is_version, tag = True, "version"
 
-    if tag in NORMAL_NAMES:
-        _tag = tag.lower()
-    else:
-        _tag = ALTERNATIVE_NAMES.get(tag, tag).lower()
-        if not is_version:
-            text = _tag
+    tag = tag.lower()
+    _tag = ALTERNATIVE_NAMES.get(tag, tag)
+    if not is_version and tag not in NORMAL_NAMES:
+        text = _tag
 
     return _tag, text, is_version
 
@@ -197,6 +148,7 @@ class ChangelogProcessor(SimpleTagInlineProcessor):
             "new": config.get("new_color", NEW_COLOR),
             "docs": config.get("docs_color", DOCS_COLOR),
             "version": config.get("version_color", VERSION_COLOR),
+            "remove": config.get("remove_color", REMOVED_COLOR),
         }
 
     def _get_colors(self, tag: str):
@@ -219,7 +171,7 @@ class ChangelogProcessor(SimpleTagInlineProcessor):
             # set style
             if self._inline_style:
                 _set_inline_style(
-                    el, *self._get_colors(text), is_version=is_version, round_corners=self._rounded_corners
+                    el, *self._get_colors(tag), is_version=is_version, round_corners=self._rounded_corners
                 )
             else:
                 el.set("class", self._get_class(tag))
@@ -253,7 +205,7 @@ class ChangelogExtension(markdown.Extension):
             "docs_color": [DOCS_COLOR, f"Background of the `Docs` tag - Default: {DOCS_COLOR}"],
             "efficiency_color": [EFFICIENCY_COLOR, f"Background of the `Efficiency` tag - Default: {EFFICIENCY_COLOR}"],
             "version_color": [VERSION_COLOR, f"Background of the `Version` tag - Default: {VERSION_COLOR}"],
-            "remove_color": [REMOVED_COLOR, f"Background of the `Remove` tag - Default: {VERSION_COLOR}"],
+            "remove_color": [REMOVED_COLOR, f"Background of the `Remove` tag - Default: {REMOVED_COLOR}"],
         }
 
         # override defaults with user settings
