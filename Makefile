@@ -1,18 +1,20 @@
-.PHONY: check dist release test lint
-
+.PHONY: check dist release test lint docs
 
 check:
-	python setup.py check
+	uv build
+	uvx twine check dist/*
 
 dist:
-	python setup.py sdist --formats=gztar bdist_wheel
+	uv build
 
 release:
-	twine upload dist/*
+	uvx twine upload dist/*
 
 test:
-	pytest .
+	uv run pytest .
 
 lint:
-	black .
-	flake8 .
+	uv run ruff check markdown_changelog tests
+
+docs:
+	uv run zensical build

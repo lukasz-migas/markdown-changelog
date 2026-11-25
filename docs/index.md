@@ -1,37 +1,23 @@
-# Welcome to Markdown Changelog's documentation
+# Markdown Changelog
 
-This Python package is an extension to the [Python Markdown](https://pypi.org/project/Markdown/) project which provides
-the means to add `changelog` badges to your documentation. To do so, wrap the desired tag in double `;` tag so when its
-processed by the markdown processor it can be turned into a `span` tag.
-
-For example, the extension transforms the text directly below
+Markdown Changelog adds badges to text processed by Python-Markdown. A marker
+such as `;;fix;;` becomes a `<span>` with a badge class. Add the project's
+stylesheet to give those classes their colors and spacing.
 
 ```markdown
-;;fix;; ;;change;; ;;improvement;; ;;efficiency;; ;;new;; ;;docs;; ;;remove;;
+;;new;; Add support for nested release notes.
+;;fix;; Preserve the version text in headings.
 ```
 
-into:
+The page renders the markers as badges:
 
-```html
-<p>
-    <span class="badge badge-fix">Fix</span>
-    <span class="badge badge-change">Change</span>
-    <span class="badge badge-improvement">Improvement</span>
-    <span class="badge badge-efficiency">Efficiency</span>
-    <span class="badge badge-new">New</span>
-    <span class="badge badge-docs">Docs</span>
-    <span class="badge badge-remove">Remove</span>
-</p>
-```
+<p><span class="badge badge-new">New</span> Add support for nested release notes.</p>
+<p><span class="badge badge-fix">Fix</span> Preserve the version text in headings.</p>
 
-which will be rendered as:
+Install the package, then register `changelog` when you create a Markdown
+converter. The extension also accepts a `ChangelogExtension` instance when you
+need to set options in Python.
 
-<p>
-    <span class="badge badge-fix">Fix</span>
-    <span class="badge badge-change">Change</span>
-    <span class="badge badge-improvement">Improvement</span>
-    <span class="badge badge-efficiency">Efficiency</span>
-    <span class="badge badge-new">New</span>
-    <span class="badge badge-docs">Docs</span>
-    <span class="badge badge-remove">Remove</span>
-</p>
+See [installation](installation.md), [usage](usage.md), and
+[styling](style.md) for examples. This documentation site uses
+[Zensical](zensical.md).

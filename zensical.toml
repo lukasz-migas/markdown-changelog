@@ -1,0 +1,18 @@
+[project]
+site_name = "Markdown Changelog"
+site_description = "Add changelog badges to Python-Markdown content."
+site_url = "https://lukasz-migas.github.io/markdown-changelog/"
+repo_url = "https://github.com/lukasz-migas/markdown-changelog"
+docs_dir = "docs"
+extra_css = ["css/style.css"]
+nav = [
+  { "Home" = "index.md" },
+  { "Installation" = "installation.md" },
+  { "Usage" = "usage.md" },
+  { "Styling" = "style.md" },
+  { "Zensical" = "zensical.md" },
+  { "History" = "history.md" },
+]
+
+[project.markdown_extensions]
+changelog = {}

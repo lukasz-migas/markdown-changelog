@@ -1,32 +1,28 @@
 # Installation
 
-## Stable release
+Markdown Changelog is published as `markdown-changelog` and supports Python
+3.11 or newer. It depends on Python-Markdown.
 
-The easiest way to install Markdown Changelog is to use [pip](https://pip.pypa.io/en/stable/)
+Install it with pip:
 
-```bash
-pip install markdown-changelog
+```sh
+python -m pip install markdown-changelog
 ```
 
+For a project using uv, add it to the project dependencies:
 
-## From source
-
-The source files for Markdown Changelog can be downloaded from the [GitHub repo](https://github.com/lukasz-migas/markdown-changelog)
-
-You may use pip to install the latest version
-
-```bash
-pip install git+git://github.com/lukasz-migas/markdown-changelog.git
+```sh
+uv add markdown-changelog
 ```
 
-Alternatively, you can also clone the public repository:
+To install the current repository checkout for development, clone the GitHub
+repository and sync its development and documentation tools:
 
-```bash
-git clone git://github.com/lukasz-migas/markdown-changelog
+```sh
+git clone https://github.com/lukasz-migas/markdown-changelog.git
+cd markdown-changelog
+uv sync --all-groups
 ```
 
-Once you have a copy of the source, you can install it with
-
-```bash
-python setup.py install
-```
+Use `uv run pytest` to run the test suite. Use `uv run zensical serve` to
+preview the documentation site locally.

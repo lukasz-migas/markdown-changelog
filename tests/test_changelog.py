@@ -1,7 +1,8 @@
 """Test mdx_changelog extension"""
-from markdown_changelog import ChangelogExtension
-import pytest
 import markdown
+import pytest
+
+from markdown_changelog import ChangelogExtension
 
 
 class TestMarkdownChangelogExtension:
