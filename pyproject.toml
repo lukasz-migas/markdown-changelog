@@ -68,3 +68,26 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
 ignore = ["E203", "E722", "E741", "W605", "F841"]
+
+# https://github.com/mgedmin/check-manifest#configuration
+[tool.check-manifest]
+ignore = [
+    ".github_changelog_generator",
+    ".pre-commit-config.yaml",
+    ".ruff_cache/**/*",
+    "setup.py",
+    "tests/**/*",
+    "**/*_version.py",
+    "*.json",
+    ".idea/*",
+    ".idea/*/*",
+    "misc/*",
+    "tox.ini",
+    "codecov.yml",
+    "Makefile",
+    "venv/*",
+    "CLAUDE.md",
+    "uv.lock",
+    "renovate.json",
+    "zensical.toml",
+]
