@@ -38,7 +38,7 @@ jobs:
       - run: uvx twine check dist/*
       - run: uv sync --locked --group dev
       - run: uv run ruff check markdown_changelog tests
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: python-package
           path: dist/*
