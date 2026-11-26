@@ -34,12 +34,10 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABI
 CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 """
-# Standard library imports
-# import re
+
 from typing import Tuple
 from xml.etree.ElementTree import Element
 
-# Third-party imports
 import markdown
 from markdown.inlinepatterns import SimpleTagInlineProcessor
 

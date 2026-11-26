@@ -1,4 +1,5 @@
 """Init"""
+
 # Local imports
 from markdown_changelog.changelog import ChangelogExtension  # noqa
 

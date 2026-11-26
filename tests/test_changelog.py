@@ -1,4 +1,5 @@
 """Test mdx_changelog extension"""
+
 import markdown
 import pytest
 
